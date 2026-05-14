@@ -20,6 +20,9 @@ export const useAudioStore = create((set) => ({
 		}),
 
     currentPlaying: null,
+    playingNow: null,
     setCurrentPlaying: (track) =>
         set((state) => ({ currentPlaying: track })),
+    setPlayingNow: (track) =>
+        set((state) => ({ playingNow: track })),
 }));

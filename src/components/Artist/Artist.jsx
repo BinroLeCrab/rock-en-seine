@@ -12,7 +12,8 @@ const Artist = ({ data }) => {
 
     const trackList = useAudioStore((state) => state.trackList);
     const updateTrackListForArtist = useAudioStore((state) => state.updateTrackListForArtist);
-    const setCurrentPlaying = useAudioStore((state) => state.setCurrentPlaying);
+    const setPlayingNow = useAudioStore((state) => state.setPlayingNow);
+    const currentPlaying = useAudioStore((state) => state.currentPlaying);
 
     const fetchDataArtistTracklist = async () => {
 
@@ -66,24 +67,32 @@ const Artist = ({ data }) => {
     useEffect(() => {
         if (artistTracklist && trackList[data.name] && trackList[data.name].length > 0) {
             // Play the first track by default
-            setCurrentPlaying(trackList[data.name][0]);
-            trackList[data.name][0].audio.play();
+            setPlayingNow(trackList[data.name][0]);
         }
     }, [artistTracklist]);
 
     const handleClick = () => {
         if (trackList[data.name] && trackList[data.name].length > 0) {
-            trackList[data.name][0].audio.play();
-            setCurrentPlaying(trackList[data.name][0]);
+            setPlayingNow(trackList[data.name][0]);
         } else if (trackList[data.name] && trackList[data.name].length === 0) {
             fetchDataArtists();
         }
     };
 
     return (
-        <p className={s.Artist} onClick={handleClick}>
-            {data.name}
-        </p>
+        <div className={s.Artist} onClick={handleClick}>
+            {(currentPlaying && currentPlaying.artist === data.name) &&
+                <div
+                    className={s.Artist__playingIndicator}
+                    style={{ backgroundImage: `url(${currentPlaying.cover})` }}
+                >
+                    <span className="sr-only">Now Playing</span>
+                </div>
+            }
+            <p className={`${s.Artist__name} ${currentPlaying && currentPlaying.artist === data.name ? s.current : ''}`}>
+                {data.name}
+            </p>
+        </div>
     );
 };
 
