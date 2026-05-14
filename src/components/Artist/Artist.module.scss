@@ -1,0 +1,22 @@
+.Artist {
+        text-transform: uppercase;
+        font-family: var(--font-secondary);
+
+        &::after {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: black;
+            border-radius: 50%;
+            margin-left: 8px;
+            margin-bottom: 0.25em;
+            vertical-align: middle;
+        }
+
+        &:last-child {
+            &::after {
+                display: none;
+            }
+        }
+    }

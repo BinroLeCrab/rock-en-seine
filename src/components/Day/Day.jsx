@@ -1,5 +1,6 @@
 import { use, useEffect, useState } from "react";
 import s from "./Day.module.scss";
+import Artist from "../Artist/Artist";
 
 const Day = ({ day, artists }) => {
 
@@ -43,9 +44,7 @@ const Day = ({ day, artists }) => {
                 {rows.map((row, rowIndex) => (
                     <div className={`${s.Day__row} ${(rowIndex === 1) || (rowIndex === 2 && hasTwoRows) ? s.secondary : ''}`} key={rowIndex}>
                         {row.map((artist, artistIndex) => (
-                            <p className={s.Day__artist} key={artistIndex}>
-                                {artist.name}
-                            </p>
+                            <Artist key={artistIndex} data={artist} />
                         ))}
                     </div>
                 ))}
