@@ -1,0 +1,28 @@
+.AudioControler {
+    position: sticky;
+    bottom: 12px;
+    margin: 0 auto;
+    width: 50vw;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: #E1E1E1;
+    padding: 8px;
+    gap: 8px;
+    border-radius: 24px;
+
+    &__cover {
+        width: 72px;
+        height: 72px;
+        object-fit: cover;
+        border-radius: 16px;
+    }
+
+    &__stop {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+}

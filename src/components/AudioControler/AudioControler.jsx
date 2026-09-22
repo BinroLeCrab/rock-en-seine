@@ -81,22 +81,26 @@ const AudioControler = () => {
 
     return currentPlaying && (
         <div className={s.AudioControler}>
-            <button onClick={previousTrack}>Previous</button>
+            <img src={currentPlaying.cover} alt={`${currentPlaying.artist} cover`} className={s.AudioControler__cover} />
             <div className={s.AudioControler__info}>
-                <img src={currentPlaying.cover} alt={`${currentPlaying.artist} cover`} className={s.AudioControler__cover} />
                 <p className={s.AudioControler__title}>{currentPlaying.title}</p>
                 <p className={s.AudioControler__artist}>{currentPlaying.artist}</p>
             </div>
+            <button onClick={previousTrack}>Previous</button>
             <button onClick={togglePlayPause}>
                 {isPaused ? 'Play' : 'Pause'}
             </button>
             <button onClick={nextTrack}>Next</button>
-            <button onClick={() => {
-                if (currentPlaying && currentPlaying.audio) {
-                    currentPlaying.audio.stop();
-                }
-                setCurrentPlaying(null);
-            }}>Stop</button>
+            <button
+                className={s.AudioControler__stop}
+                onClick={() => {
+                    if (currentPlaying && currentPlaying.audio) {
+                        currentPlaying.audio.stop();
+                    }
+                    setCurrentPlaying(null);
+                }}
+                title="Stop"
+            ><span className="sr-only">Stop</span>X</button>
         </div>
     );
 };
